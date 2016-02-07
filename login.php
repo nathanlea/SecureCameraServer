@@ -19,9 +19,9 @@
 	$userName =  $_POST['username'];
 	$password = $_POST['password'];
 	$number = $_POST['number'];
-	$filePath1 = "/websites/mysite/www/users.txt";
-	$filePath2 = "/websites/mysite/www/init1.txt";
-
+	$filePath1 = "/website/secure/www/users.txt";
+	$filePath2 = "/website/secure/www/init1.txt";
+	$filePath3 = "/website/secure/www/index.json";
 	if(file_exists($filePath1)) {
 		if(filesize($filePath1) <= 1){
 			//Register
@@ -50,7 +50,7 @@
 			$fh = fopen($filePath1, 'r');
 			$k = fread($fh, filesize($filePath1));
 			$data = explode (',', $k);
-
+			fclose($fh);
 			$u = $data[0];
 			$p = $data[1];
 			$s1 = $data[2];
@@ -61,6 +61,9 @@
 
 			if($u == $hu1 && $p == $hp1){
 				echo "Login Successful";
+				$fh2 = fopen($filePath3, 'r');
+				$d = fread($fh2, filesize($filePath3));
+				echo $d ;
 			}
 			else{
 				echo "Try again";
@@ -76,6 +79,7 @@
 		$data =  explode(',', $d);
 		$s1 = $data[1];
 		$reg = $data[0];
+		//$number = "123456789101112131415";
 		/*$s = salt();
 		$n = hash('sha256', ($number . $s), FALSE);
 		$fh2 = fopen($filePath2, 'w+');
@@ -83,7 +87,7 @@
 
 		echo 'Success';
 		exit();*/
-
+		echo $reg . '<br>';
 		if($userName === 'user' && $password === 'password'){
 			if($reg == hash("sha256", ($number . $s1), FALSE)){
 				//Registration test page
