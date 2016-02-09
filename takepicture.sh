@@ -6,9 +6,9 @@ mkdir webcam
 
 sudo mount -t tmpfs tmpfs webcam
 
-fswebcam -r 640x480 --no-banner /home/pi/webcam/$DATE.jpg
+fswebcam -r 640x480 --no-banner /home/pi/SecureCameraServer/webcam/toSend.jpg
 #call sript to send 
-#python RSA/SSLtestWebcam.py /home/pi/webcam/$DATE.jpg
+python SSLtestWebcam.py
 
 sudo umount webcam
 

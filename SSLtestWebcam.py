@@ -6,7 +6,7 @@ def get_bytes_from_file(filename):
 if __name__ == '__main__':
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    ipnathan = '10.198.117.48'
+    ipnathan = '139.78.71.59'
     portnathan = 10023
     #req cert from server
     ssl_sock = ssl.wrap_socket(s, ca_certs="server.crt", cert_reqs=ssl.CERT_REQUIRED)
@@ -18,8 +18,8 @@ if __name__ == '__main__':
     print pprint.pformat(ssl_sock.getpeercert())
 
     #simple http request-- use httplib in actual
-    ssl_sock.write(get_bytes_from_file(str(sys.argv))
-
+    #ssl_sock.write(get_bytes_from_file(str(sys.argv)))
+    ssl_sock.write(get_bytes_from_file('webcam/toSend.jpg'))
     #read a data chunk, not necessarily all returned by server
     #data = ssl_sock.read()
 
