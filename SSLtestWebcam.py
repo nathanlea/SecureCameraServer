@@ -7,7 +7,7 @@ if __name__ == '__main__':
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     ipnathan = '139.78.71.59'
-    portnathan = 10023
+    portnathan = 10024
     #req cert from server
     ssl_sock = ssl.wrap_socket(s, ca_certs="server.crt", cert_reqs=ssl.CERT_REQUIRED)
 
