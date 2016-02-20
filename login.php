@@ -1,9 +1,3 @@
-<html>
-
-<head>
-<title> Submitted Data! </title>
-</head>
-<body>
 <?php
 	function salt() {
 		$chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[{}]\|<>.?/';
@@ -67,6 +61,9 @@
 				//$fh2 = fopen($filePath3, 'r');
 				//$d = fread($fh2, filesize($filePath3));
 				//echo $d ;
+				$fh3 = fopen($filePath3, 'r');
+				$d = fread($fh3, filesize($filePath3));
+				echo $d ;
 			}
 			else{
 				echo "1";
@@ -124,5 +121,3 @@
 	}
 
 ?>
-</body>
-</html>

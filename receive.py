@@ -1,4 +1,4 @@
-import socket, ssl, pprint, json, os.path
+import sys, socket, ssl, pprint, json, os.path
 
 def month_lup(str):
 	if(str == '01'):
@@ -85,21 +85,21 @@ def update_index(year, month, day, hour, datastr, hourstr, daystr, monthstr, yea
 		f.write(newstr)
 		f.close()
 
-if __name__ == "__main__":
-	string = "2016050608031.png"
-
+def receive(string, picture):
+	print string
+	print picture
 	year = string[0:4]
 	month = string[4:6]
 	day = string[6:8]
 	hour = string[8:10]
 	minute = string[10:12]
 	code = string[12:13]
-	month = month_lup(month)		
-	newstr = '{"%s":{"%s":{"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}}}}' % (year, month, day, hour, string, string[0:12], code)	
-	yearstr = '"%s":{"%s":{"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}}}'% (year, month, day, hour, string, string[0:12], code)
-	monthstr = '"%s":{"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}}'%(month, day, hour, string, string[0:12], code)
-	daystr = '"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}'%(day, hour, string, string[0:12], code)
-	hourstr = '"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]'%(hour, string, string[0:12], code)
-	datastr= '{"filename":"%s","datetaken":"%s","bold":"%s"}'%(string, string[0:12], code)
+	month = month_lup(month)
+	newstr = '{"%s":{"%s":{"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}}}}' % (year, month, day, hour, picture, string[0:12], code)	
+	yearstr = '"%s":{"%s":{"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}}}'% (year, month, day, hour, picture, string[0:12], code)
+	monthstr = '"%s":{"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}}'%(month, day, hour, picture, string[0:12], code)
+	daystr = '"%s":{"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]}'%(day, hour, picture, string[0:12], code)
+	hourstr = '"%s":[{"filename":"%s","datetaken":"%s","bold":"%s"}]'%(hour, picture, string[0:12], code)
+	datastr= '{"filename":"%s","datetaken":"%s","bold":"%s"}'%(picture, string[0:12], code)
 	update_index(year, month, day, hour, datastr, hourstr, daystr, monthstr, yearstr, newstr)	
 
