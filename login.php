@@ -64,6 +64,8 @@
 				$fh3 = fopen($filePath3, 'r');
 				$d = fread($fh3, filesize($filePath3));
 				echo $d ;
+				fflush($fh3);
+				fclose($fh3);
 			}
 			else{
 				echo "1";
