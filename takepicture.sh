@@ -1,16 +1,17 @@
 #!/bin/bash
 
-COUNTER=0
+i="0"
 DATE=$(date +%Y-%m-%d_%H%M)
 
-while [ $COUNTER -le 5 ]
+while [ $i -lt 4 ]
 do
-	mkdir webcam
-	sudo mount -t tmpfs tmpfs webcam
-	fswebcam -r 640x480 /home/pi/SecureCameraServer/webcam/toSend.jpg
-	#call sript to send 
-	python SSLtestWebcam.py
-	sudo umount webcam
-	rm -r webcam
-	sleep 60
+mkdir -p /home/pi/SecureCameraServer/webcam
+sudo mount -t tmpfs tmpfs /home/pi/SecureCameraServer/webcam
+raspistill -o /home/pi/SecureCameraServer/webcam/toSend.jpg
+#call sript to send 
+python SSLtestWebcam.py
+sleep 10
+sudo umount /home/pi/SecureCameraServer/webcam
+rm -r /home/pi/SecureCameraServer/webcam
+echo "script complete"
 done
