@@ -38,7 +38,6 @@ def update_index(year, month, day, hour, datastr, hourstr, daystr, monthstr, yea
 		new = ''
 		for c in old:
 			new+=c
-			place+=1
 			if c == '{' or c == '[' :
 				level+=1
 			elif c == '}' or c == ']':
@@ -46,36 +45,36 @@ def update_index(year, month, day, hour, datastr, hourstr, daystr, monthstr, yea
 			if level == 1:
 				if(old[place:place+4] == year):
 					matchLevel = 1
-				elif(matchLevel == 0 and old[place] == '}' and place == len(old)-1):
+				elif(matchLevel == 0 and old[place] == '}' and place == len(old)-2):
 					new+=','
 					new+=yearstr
 					matchLevel=-1
 			elif level == 2:
 				if(old[place:place+len(month)] == month and matchLevel == 1):
 					matchLevel = 2
-				elif(matchLevel == 1 and old[place] == '}'):
+				elif(matchLevel == 1 and old[place+1] == '}' and old[place+2] != ','):
 					new+=','
 					new+=monthstr
 					matchLevel=-1
 			elif level == 3:
 				if(old[place:place+2] == day and matchLevel==2):
 					matchLevel = 3
-				elif(matchLevel == 2 and old[place] == '}' and old[place+1] != ','):
+				elif(matchLevel == 2 and old[place+1] == '}' and old[place+2] != ','):
 					new+=','
 					new+=daystr
 					matchLevel=-1
 			elif level == 4:
 				if(old[place:place+2] == hour and matchLevel == 3):
 					matchLevel = 4
-				elif (matchLevel == 3 and old[place] == '}' and old[place+1] != ','):
+				elif (matchLevel == 3 and old[place+1] == '}' and old[place+2] != ','):
 					new+=','
 					new+= hourstr
 					matchLevel = -1
-			elif (matchLevel == 4 and old[place-1] == '}' and old[place] != ','):
+			elif (matchLevel == 4 and old[place+1] == '}' and old[place+2] != ','):
 				new+=','
 				new+= datastr
 				matchLevel = -1
-		
+			place+=1
 		f = open('index.json', 'w')
 		f.write(new)	
 		f.close()
