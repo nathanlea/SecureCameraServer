@@ -70,7 +70,7 @@ def update_index(year, month, day, hour, datastr, hourstr, daystr, monthstr, yea
 					new+=','
 					new+= hourstr
 					matchLevel = -1
-			elif (matchLevel == 4 and old[place+1] == '}' and old[place+2] != ','):
+			elif (matchLevel == 4 and old[place] == '}' and old[place+1] != ','):
 				new+=','
 				new+= datastr
 				matchLevel = -1
@@ -85,8 +85,6 @@ def update_index(year, month, day, hour, datastr, hourstr, daystr, monthstr, yea
 		f.close()
 
 def receive(string, picture):
-	print string
-	print picture
 	year = string[0:4]
 	month = string[4:6]
 	day = string[6:8]
